@@ -11,24 +11,17 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    # - name: Set up Python
-    #   uses: actions/setup-python@v5
-    #   with:
-    #     python-version: '3.13' 
-
-    # - name: Check Python Version and Install Dependencies
-    #   run: |
-    #     python --version
-    #     python -m venv venv
-    #     .\venv\Scripts\activate
-    #     python -m pip install --upgrade pip
-    #     python -m pip install -r requirements.txt
-    #     flask db init
-    #     flask db migrate -m "entries table"
-    #     flask db upgrade
-    #     flask run
+    - name: Test Flask App
+      run: |
+        python --version
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+        # Run Unit Test for Flask App
+        pytest
+        # Check Lint Code
+        flake8
         
-    - name: Push image to DockerHub
+    - name: Push Flask App image to DockerHub
       run: |
         docker build -t flask-app .
         docker tag flask-app:latest dukedocker687/flask-app:latest
