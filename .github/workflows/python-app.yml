@@ -6,7 +6,7 @@ on:
     branches: [ "master" ]
     
 jobs:
-  build:
+  test:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v4
@@ -20,7 +20,11 @@ jobs:
         python -m pytest
         # Check Lint Code
         python -m flake8 --exit-zero
-        
+  build:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v4
+
     - name: Push Flask App image to DockerHub
       run: |
         docker build -t flask-app .
