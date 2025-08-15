@@ -19,9 +19,9 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         # Run Unit Test for Flask App
-        pytest
+        python -m pytest
         # Check Lint Code
-        flake8
+        python -m flake8
         
     - name: Push Flask App image to DockerHub
       run: |
